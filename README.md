@@ -16,3 +16,5 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 # CS461
 Veterinary Mobile App Drug Calculator/Database
+<br>
+Nicholas Ledbetter, Katie Schaumleffle, Liam Gombart, Brandon Foreman
