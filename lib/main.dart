@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Veterinary Application',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -47,19 +47,23 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class Animal {
+  final String title;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  Animal(this.title);
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final List<Animal> animals = [
+    Animal('Dog'),
+    Animal('Cat'),
+    Animal('Equine'),
+    Animal('Goat'),
+    Animal('Sheep/Goat'),
+    Animal('Pig'),
+    Animal('Cattle'),
+    Animal('Camelid'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -75,41 +79,110 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: ListView.builder(
+          itemCount: animals.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+                title: Text(animals[index].title),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              DetailsScreen(animal: animals[index])));
+                });
+          }
+          // children: <Widget>[
+          //   ListTile(
+          //     title: Center(child: Text(animals[0].title)),
+          //     shape: RoundedRectangleBorder(
+          //       side: BorderSide(color: Colors.black),
+          //       borderRadius: BorderRadius.circular(20.0),
+          //     ),
+          //     onTap: () {
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //           builder: (context) => DetailScreen(animal: animals[index])
+          //     )
+          //       )
+          //     }
+          //   ),
+          //   ListTile(
+          //     title: Center(child: Text(animals[1].title)),
+          //     shape: RoundedRectangleBorder(
+          //       side: BorderSide(color: Colors.black),
+          //       borderRadius: BorderRadius.circular(20.0),
+          //     ),
+          //   ),
+          //   ListTile(
+          //     title: Center(child: Text(animals[2].title)),
+          //     shape: RoundedRectangleBorder(
+          //       side: BorderSide(color: Colors.black),
+          //       borderRadius: BorderRadius.circular(20.0),
+          //     ),
+          //   ),
+          //   ListTile(
+          //     title: Center(child: Text(animals[3].title)),
+          //     shape: RoundedRectangleBorder(
+          //       side: BorderSide(color: Colors.black),
+          //       borderRadius: BorderRadius.circular(20.0),
+          //     ),
+          //   ),
+          //   ListTile(
+          //     title: Center(child: Text(animals[4].title)),
+          //     shape: RoundedRectangleBorder(
+          //       side: BorderSide(color: Colors.black),
+          //       borderRadius: BorderRadius.circular(20.0),
+          //     ),
+          //   ),
+          //   ListTile(
+          //     title: Center(child: Text(animals[5].title)),
+          //     shape: RoundedRectangleBorder(
+          //       side: BorderSide(color: Colors.black),
+          //       borderRadius: BorderRadius.circular(20.0),
+          //     ),
+          //   ),
+          //   ListTile(
+          //     title: Center(child: Text(animals[6].title)),
+          //     shape: RoundedRectangleBorder(
+          //       side: BorderSide(color: Colors.black),
+          //       borderRadius: BorderRadius.circular(20.0),
+          //     ),
+          //   ),
+          //   ListTile(
+          //     title: Center(child: Text(animals[7].title)),
+          //     shape: RoundedRectangleBorder(
+          //       side: BorderSide(color: Colors.black),
+          //       borderRadius: BorderRadius.circular(20.0),
+          //     ),
+          //   ),
+          // ],
+          ),
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+class DetailsScreen extends StatelessWidget {
+  const DetailsScreen({super.key, required this.animal});
+
+  final Animal animal;
+
+  final String loremIpsum =
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
+  @override
+  Widget build(BuildContext context) {
+    //final animal = ModalRoute.of(context)!.settings.arguments as Animal;
+
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(animal.title),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(loremIpsum),
+        ));
   }
 }
