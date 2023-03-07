@@ -1,23 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:vet_app/lib.dart';
 
-final List<Drug> drugList = [
-  Drug(1, 'Acepromazine'),
-  Drug(2, 'Alfaxalone'),
-  Drug(3, 'Atropine'),
-  Drug(4, 'Azaperone'),
-  Drug(5, 'Buprenorphine')
-];
-
 class DrugDropdownButton extends StatefulWidget {
-  const DrugDropdownButton({super.key});
+  final DrugList drugList;
+  const DrugDropdownButton({super.key, required this.drugList});
 
   @override
   State<DrugDropdownButton> createState() => _DrugDropdownButtonState();
 }
 
 class _DrugDropdownButtonState extends State<DrugDropdownButton> {
-  Drug? dropdownValue = drugList.first;
+  Drug? dropdownValue;
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +33,11 @@ class _DrugDropdownButtonState extends State<DrugDropdownButton> {
           onChanged: (Drug? value) {
             setState(() {
               dropdownValue = value;
-              //print(value?.name);
+              print(value?.name);
             });
           },
-          items: drugList.map<DropdownMenuItem<Drug>>((Drug value) {
+          items:
+              widget.drugList.entries.map<DropdownMenuItem<Drug>>((Drug value) {
             return DropdownMenuItem(
               value: value,
               child: Text(value.name),

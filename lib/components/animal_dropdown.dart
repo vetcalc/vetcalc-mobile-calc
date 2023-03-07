@@ -1,25 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:vet_app/lib.dart';
 
-List<Animal> speciesList = [
-  Animal(1, 'Dog', 99, 120, 90, []),
-  Animal(2, 'Cat', 98, 120, 100, []),
-  Animal(3, 'Equine', 100, 110, 90, []),
-  Animal(4, 'Sheep/Goat', 99, 95, 85, []),
-  Animal(5, 'Swine', 97, 122, 110, []),
-  Animal(6, 'Cattle', 96, 75, 60, []),
-  Animal(7, 'Camelid', 101, 60, 50, []),
-];
-
 class AnimalDropdownButton extends StatefulWidget {
-  const AnimalDropdownButton({super.key});
+  final AnimalList animalList;
+  const AnimalDropdownButton({super.key, required this.animalList});
 
   @override
   State<AnimalDropdownButton> createState() => _AnimalDropdownButtonState();
 }
 
 class _AnimalDropdownButtonState extends State<AnimalDropdownButton> {
-  Animal? dropdownValue = speciesList.first;
+  Animal? dropdownValue;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +35,8 @@ class _AnimalDropdownButtonState extends State<AnimalDropdownButton> {
               dropdownValue = value;
             });
           },
-          items: speciesList.map<DropdownMenuItem<Animal>>((Animal value) {
+          items: widget.animalList.entries
+              .map<DropdownMenuItem<Animal>>((Animal value) {
             return DropdownMenuItem(
               value: value,
               child: Text(value.name),

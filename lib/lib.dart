@@ -1,7 +1,9 @@
 library vet_app;
 
-export 'components/animal.dart';
-export 'components/drug.dart';
+export 'models/animal.dart';
+export 'models/animal_list.dart';
+export 'models/drug.dart';
+export 'models/drug_list.dart';
 export 'components/tab_controller.dart';
 export 'components/animal_dropdown.dart';
 export 'components/drug_dropdown.dart';
