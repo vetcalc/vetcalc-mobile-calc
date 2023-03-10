@@ -1,27 +1,23 @@
+import 'package:flutter/material.dart';
+import 'package:vet_app/lib.dart';
+
 class Concentration {
   final int concentration_id;
-  final double temperature_low;
-  final double temperature_high;
-  final double heart_rate_low;
-  final double heart_rate_high;
-  final double respiratory_rate_low;
-  final double respiratory_rate_high;
+  final int value;
+  final int unit_id;
+  final int dosage_id;
 
   Concentration(
-      this.concentration_id,
-      this.temperature_low,
-      this.temperature_high,
-      this.heart_rate_low,
-      this.heart_rate_high,
-      this.respiratory_rate_low,
-      this.respiratory_rate_high);
+      {required this.concentration_id,
+      required this.value,
+      required this.unit_id,
+      required this.dosage_id});
 
-  Concentration.fromJson(Map<String, dynamic> json)
-      : concentration_id = json['id'],
-        temperature_low = json['temperature_low'],
-        temperature_high = json['temperature_high'],
-        heart_rate_low = json['heart_rate_low'],
-        heart_rate_high = json['heart_rate_high'],
-        respiratory_rate_low = json['respiratory_rate_low'],
-        respiratory_rate_high = json['respiratory_rate_high'];
+  factory Concentration.fromJson(Map<String, dynamic> json) {
+    return Concentration(
+        concentration_id: int.parse(json['concentration_id']),
+        value: int.parse(json['value']),
+        unit_id: int.parse(json['unit_id']),
+        dosage_id: int.parse(json['dosage_id']));
+  }
 }

@@ -1,10 +1,18 @@
-class Dosage {
-  final int dosage_id;
+import 'package:flutter/material.dart';
+import 'package:vet_app/lib.dart';
+
+class Delivery {
+  final int delivery_id;
   final int method_id;
 
-  Dosage(this.dosage_id, this.method_id);
+  Delivery({
+    required this.delivery_id,
+    required this.method_id,
+  });
 
-  Dosage.fromJson(Map<String, dynamic> json)
-      : dosage_id = json['dosage_id'],
-        method_id = json['method_id'];
+  factory Delivery.fromJson(Map<String, dynamic> json) {
+    return Delivery(
+        delivery_id: int.parse(json['delivery_id']),
+        method_id: int.parse(json['method_id']));
+  }
 }
