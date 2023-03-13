@@ -54,11 +54,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     retrieveDosageData();
   }
 
-  @override
-  void dispose() {
-    calculatorController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   calculatorController.dispose();
+  //   super.dispose();
+  // }
 
   void retrieveAnimalData() async {
     final http.Response apiResponse =

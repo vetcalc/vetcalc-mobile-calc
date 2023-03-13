@@ -4,7 +4,7 @@ class Dosage {
   final int drug_id;
   final double dose_low;
   final double dose_high;
-  final int dose_unit_id;
+  final int? dose_unit_id; // SHOULD BE INT - NULL
   final String? notes;
 
   Dosage(
@@ -17,6 +17,7 @@ class Dosage {
       required this.notes});
 
   factory Dosage.fromJson(Map<String, dynamic> json) {
+    print(json['dose_unit_id']);
     return Dosage(
         dosage_id: int.parse(json['dosage_id']),
         animal_id: int.parse(json['animal_id']),
