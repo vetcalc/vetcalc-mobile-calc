@@ -15,6 +15,8 @@ class CalculatorScreen extends StatefulWidget {
   static const String concentrationURL = 'https://vaddb.liamgombart.com/drugs';
   //static const String deliveryURL = 'https://vaddb.liamgombart.com/drugs';
   static const String dosageURL = 'https://vaddb.liamgombart.com/dosages';
+  static const String dosageDerefURL =
+      'https://vaddb.liamgombart.com/deref/dosages';
   //static const String methodURL = 'https://vaddb.liamgombart.com/drugs';
   //static const String unitURL = 'https://vaddb.liamgombart.com/drugs';
 
@@ -40,6 +42,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   List<Dosage> dosages = [];
   var dosageList = DosageList(entries: []);
 
+  List<DosageDeref> dosagesDeref = [];
+  var dosageDerefList = DosageDerefList(entries: []);
+
   List<Method> methods = [];
   var methodList = MethodList(entries: []);
 
@@ -52,6 +57,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     retrieveAnimalData();
     retrieveDrugData();
     retrieveDosageData();
+    retrieveDosageDerefData();
   }
 
   // @override
@@ -94,6 +100,13 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     final http.Response apiResponse =
         await http.get(Uri.parse(CalculatorScreen.dosageURL));
     dosageList = DosageList.fromJson(jsonDecode(apiResponse.body));
+    setState(() {});
+  }
+
+  void retrieveDosageDerefData() async {
+    final http.Response apiResponse =
+        await http.get(Uri.parse(CalculatorScreen.dosageDerefURL));
+    dosageDerefList = DosageDerefList.fromJson(jsonDecode(apiResponse.body));
     setState(() {});
   }
 
@@ -341,7 +354,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   border: OutlineInputBorder(),
                   hintText: "Enter the animal's weight in kg"),
               onChanged: (value) {
-                answerValue = int.parse(value);
+                answerValue = int.parse(
+                    value); // THIS LINE HAS A BUG WHEN DELETING DATA FROM THE CALCULATOR WEIGHT FIELD. CAUSES EXCEPTION
                 setState(() {
                   answerValue = int.parse(value);
                 });
@@ -355,6 +369,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             onPressed: () async {
               //eachDosage();
               eachDosageLooper();
+              print(dosageDerefList.entries[0].toString());
             },
             child: Text('Calculate Dosage'),
           ),

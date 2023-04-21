@@ -8,6 +8,8 @@ export 'models/concentration.dart';
 export 'models/concentration_list.dart';
 export 'models/dosage.dart';
 export 'models/dosage_list.dart';
+export 'models/dosage_deref.dart';
+export 'models/dosage_deref_list.dart';
 export 'models/method.dart';
 export 'models/method_list.dart';
 export 'models/delivery.dart';
